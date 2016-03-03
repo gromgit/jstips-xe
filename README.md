@@ -9,10 +9,12 @@ Original Tip # | Extended Exposition
 ------|----------------------------
 [33](https://github.com/loverajoel/jstips/blob/gh-pages/_posts/en/2016-02-02-create-range-0...n-easily-using-one-line.md) | [High Magic Solution 1 explained](tips/33.md)
 
-If you feel that a tip is calling out for a better explanation, see if someone else has already asked [over on JS Tips](https://github.com/loverajoel/jstips/issues), and raise a new issue if necessary. I'll see if I can help with that, and if so, whether I'll:
+### How Can I Help?
+If you feel that a tip needs a better explanation, see if someone else has already asked [over on JS Tips](https://github.com/loverajoel/jstips/issues), and raise a new issue if necessary. I'll see if I can help with that, and if so, whether I'll:
 * contribute an update PR to the tip over there, or
 * write my own explanation here.
 
 If you think these expositions are faulty or unclear, [raise an issue](https://github.com/gromgit/jstips-xe/issues). Better yet, submit an update PR so everyone can benefit.
 
-Finally, do [watch](https://github.com/gromgit/jstips-xe/subscription) this repo for updates.
+### License
+[Creative Commons Attribution 4.0 International](LICENSE.md)
