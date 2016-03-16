@@ -12,7 +12,7 @@ _Monkeypatching_ is basically the practice of _overriding existing functions tha
 
 I'll extend the definition of _monkeypatching_ to include _adding new functions to objects you don't control_ (e.g. `HTMLElement.prototype.on`, or leaving `toString()` alone and defining `Date.prototype.format(fmt)`).
 
-There are [enough](https://davidwalsh.name/monkey-patching) [monkeypatching](http://me.dt.in.th/page/JavaScript-override/) [howtos](http://raganwald.com/2015/08/08/monkey-patching-extension-methods-bind-operator.html) online; please read those if you're new to this concept.
+There are [enough&#x1f517;](https://davidwalsh.name/monkey-patching) [monkeypatching&#x1f517;](http://me.dt.in.th/page/JavaScript-override/) [howtos&#x1f517;](http://raganwald.com/2015/08/08/monkey-patching-extension-methods-bind-operator.html) online; please read those if you're new to this concept.
 
 ### DO: Change as little as possible.
 
@@ -24,7 +24,7 @@ The best monkeypatches:
 
 This way, any other code that calls the monkeypatched function still gets the behavior it expects, thus minimizing logic bugs.
 
-The _Meet the `override` function_ section of [this article](http://me.dt.in.th/page/JavaScript-override/) shows a neat way to do this:
+The _Meet the `override` function_ section of [this article&#x1f517;](http://me.dt.in.th/page/JavaScript-override/) shows a neat way to do this:
 
 ```js
 // callback_factory(original) takes the original callback and
@@ -82,7 +82,7 @@ If the changes are significant, label them as **potentially breaking changes** t
 
 ### DON'T: Monkeypatch new functions to "core objects".
 
-Monkeypatching new methods to "core objects" (e.g. `HTMLElement` and `Object`) is a fairly common way to quickly insert functionality into a large part of your JavaScript environment, but you also run the risk of having your method names clash with other libraries and third-party code. Since these "core objects" are fundamental to your runtime environment, you can't use techniques like [IIFEs](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) and [ES2015 modules](https://babeljs.io/docs/learn-es2015/#modules) to avoid namespace collisions.
+Monkeypatching new methods to "core objects" (e.g. `HTMLElement` and `Object`) is a fairly common way to quickly insert functionality into a large part of your JavaScript environment, but you also run the risk of having your method names clash with other libraries and third-party code. Since these "core objects" are fundamental to your runtime environment, you can't use techniques like [IIFEs&#x1f517;](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) and [ES2015 modules&#x1f517;](https://babeljs.io/docs/learn-es2015/#modules) to avoid namespace collisions.
 
 For example, the `HTMLElement` example at the beginning does this:
 
