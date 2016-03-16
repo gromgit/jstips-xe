@@ -12,19 +12,19 @@ _Monkeypatching_ is basically the practice of _overriding existing functions tha
 
 I'll extend the definition of _monkeypatching_ to include _adding new functions to objects you don't control_ (e.g. `HTMLElement.prototype.on`, or leaving `toString()` alone and defining `Date.prototype.format(fmt)`).
 
-There are [enough&#x1f517;](https://davidwalsh.name/monkey-patching) [monkeypatching&#x1f517;](http://me.dt.in.th/page/JavaScript-override/) [howtos&#x1f517;](http://raganwald.com/2015/08/08/monkey-patching-extension-methods-bind-operator.html) online; please read those if you're new to this concept.
+There are enough monkeypatching tutorials online (e.g. [1](https://davidwalsh.name/monkey-patching), [2](http://me.dt.in.th/page/JavaScript-override/), [3](http://raganwald.com/2015/08/08/monkey-patching-extension-methods-bind-operator.html)); please read those if you're new to this concept.
 
 ### DO: Change as little as possible.
 
 The best monkeypatches:
 
-- don't remove any published functionality of the original function,
+- don't remove or change any published functionality of the original function,
 - call the original function to do most of the work, and
-- only add a little code to fix or add some missing functionality.
+- only add a little code to fix or add some extra functionality.
 
-This way, any other code that calls the monkeypatched function still gets the behavior it expects, thus minimizing logic bugs.
+This way, any code that expects the old function doesn't get something completely different, thus minimizing logic bugs.
 
-The _Meet the `override` function_ section of [this article&#x1f517;](http://me.dt.in.th/page/JavaScript-override/) shows a neat way to do this:
+The _Meet the `override` function_ section of [this article](http://me.dt.in.th/page/JavaScript-override/) shows a neat way to do this:
 
 ```js
 // callback_factory(original) takes the original callback and
@@ -82,7 +82,7 @@ If the changes are significant, label them as **potentially breaking changes** t
 
 ### DON'T: Monkeypatch new functions to "core objects".
 
-Monkeypatching new methods to "core objects" (e.g. `HTMLElement` and `Object`) is a fairly common way to quickly insert functionality into a large part of your JavaScript environment, but you also run the risk of having your method names clash with other libraries and third-party code. Since these "core objects" are fundamental to your runtime environment, you can't use techniques like [IIFEs&#x1f517;](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) and [ES2015 modules&#x1f517;](https://babeljs.io/docs/learn-es2015/#modules) to avoid namespace collisions.
+Monkeypatching new methods to "core objects" (e.g. `HTMLElement` and `Object`) is a fairly common way to quickly insert functionality into a large part of your JavaScript environment, but you also run the risk of having your method names clash with other libraries and third-party code. Since these "core objects" are fundamental to your runtime environment, you can't use techniques like [IIFEs](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) and [ES2015 modules](https://babeljs.io/docs/learn-es2015/#modules) to avoid namespace collisions.
 
 For example, the `HTMLElement` example at the beginning does this:
 
@@ -100,9 +100,19 @@ HTMLElement.prototype.on = function(color) {
 }
 ```
 
-One will overwrite the other, so you'll see strange behavior like exceptions being thrown, no handlers being registered, etc. Blindly using the `override` function in this scenario will cause even more havoc, since the two functions have different interfaces and "meaning".
+One will overwrite the other, so you'll see strange behavior like exceptions being thrown, a glaringly-bright UI, no handlers being registered, etc. Blindly using the `override` function in this scenario will cause even more havoc, since the two functions have different interfaces and "meaning".
 
 Worse, if the library focuses on buttons, perhaps the developer monkeypatched `HTMLButtonElement` instead, which is a child of `HTMLElement`. Now, all your buttons don't respond to clicks, but everything else works perfectly.
+
+In most cases, you can avoid this scenario by "fully-qualifying" your method names using a technique similar to Java's [package naming conventions](https://en.wikipedia.org/wiki/Java_package#Package_naming_conventions):
+
+```js
+HTMLElement.prototype.com_github_on = function(event,cb) {
+  // register 'cb' as 'event's handler
+}
+```
+
+You'd basically be trading ugly consequences for ugly method names.
 
 ### SUMMARY
 
