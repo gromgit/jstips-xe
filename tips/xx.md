@@ -18,7 +18,7 @@ There are enough monkeypatching tutorials online (e.g. [1](https://davidwalsh.na
 
 The best monkeypatches:
 
-- don't remove or change any published functionality of the original function,
+- don't remove or change any _official_ behavior of the original function,
 - call the original function to do most of the work, and
 - only add a little code to fix or add some extra functionality.
 
@@ -49,7 +49,7 @@ override(test, 'saveResults', function(original) {
 test.run()
 ```
 
-### DON'T: Change function interfaces (but extending is usually OK).
+### DON'T: Change function interfaces (extending parameter list is usually OK).
 
 If the original function looks like:
 
@@ -69,7 +69,7 @@ However, _adding_ new arguments is generally OK. For instance, `Date.prototype.t
 
 ### DO: Document your monkeypatch extensively.
 
-Your monkeypatch changes something in the original API, so you **MUST** document it thoroughly, both in the source code and API documentation. You should include, at minimum:
+Your monkeypatch changes something in the original API, so you should document it thoroughly, both in the source code and API documentation. You should include, at minimum:
 
 - what problem is being solved by your monkeypatch
 - how does your monkeypatch change the behavior of the base objects/methods
@@ -77,7 +77,7 @@ Your monkeypatch changes something in the original API, so you **MUST** document
 
 If the changes are significant, label them as **potentially breaking changes** to remind everyone to pay special attention. This applies especially if your monkeypatch actually _fixes_ the function to comply with the API documentation; if you don't:
 
-- your colleagues may write their own fixes, and the combined fix "stack" will probably do strange things,
+- your colleagues may write their own independent fixes, and the combined fix "stack" will probably do strange things,
 - the library author finally fixes the function, and the library upgrade + your forgotten monkeypatch breaks the function again, but in a different way
 
 ### DON'T: Monkeypatch new functions to "core objects".
@@ -102,7 +102,7 @@ HTMLElement.prototype.on = function(color) {
 
 One will overwrite the other, so you'll see strange behavior like exceptions being thrown, a glaringly-bright UI, no handlers being registered, etc. Blindly using the `override` function in this scenario will cause even more havoc, since the two functions have different interfaces and "meaning".
 
-Worse, if the library focuses on buttons, perhaps the developer monkeypatched `HTMLButtonElement` instead, which is a child of `HTMLElement`. Now, all your buttons don't respond to clicks, but everything else works perfectly.
+Worse, if the library focuses on buttons, perhaps the developer monkeypatched `HTMLButtonElement` instead, which is a child of `HTMLElement`. Now, all your super-bright buttons don't respond to clicks, but everything else works perfectly.
 
 In most cases, you can avoid this scenario by "fully-qualifying" your method names using a technique similar to Java's [package naming conventions](https://en.wikipedia.org/wiki/Java_package#Package_naming_conventions):
 
