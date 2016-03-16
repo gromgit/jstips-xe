@@ -7,6 +7,7 @@ I'm an occasional tip editor, and ever so often, I run across a tip that cries o
 
 Original Tip # | Extended Exposition
 ------|----------------------------
+[XX: DOM event listening made easy](tip_to_be_published) | [Some do's and don'ts on monkeypatching](tips/xx.md)
 [33: Create Range 0...(N-1) easily using one line](https://github.com/loverajoel/jstips/blob/gh-pages/_posts/en/2016-02-02-create-range-0...n-easily-using-one-line.md) | [High Magic Solution 1 explained](tips/33.md)
 [18: Truncating the fast (but risky) way](https://github.com/loverajoel/jstips/blob/gh-pages/_posts/en/2016-01-18-rounding-the-fast-way.md) | ["32 bits ought to be enough for anybody"](tips/18.md)
 
