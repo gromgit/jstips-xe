@@ -121,6 +121,6 @@ Most of the downsides in monkeypatching result from one simple fact: you're publ
 - Don't monkeypatch if there are other solutions that are less "clever", but also have less widespread impact on the correctness of your code.
 - KISS your monkeypatches - Keep It Short & Simple.
 - Reduce the scope of your changes as much as possible.
-- Write down what your patch changes, everywhere the original function was also documented.
-- Don't monkey with Very Important Objects.
+- Write down in detail why your patch exists, what it does, and how to get rid of it if no longer wanted.
+- Try not to monkey with Very Important Objects.
 - Only apply the `override` technique to existing functions with standardized behavior.
