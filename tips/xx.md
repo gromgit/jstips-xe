@@ -80,7 +80,7 @@ If the changes are significant, label them as **potentially breaking changes** t
 - your colleagues may write their own independent fixes, and the combined fix "stack" will probably do strange things,
 - the library author finally fixes the function, and the library upgrade + your forgotten monkeypatch breaks the function again, but in a different way
 
-### DON'T: Monkeypatch new functions to "core objects".
+### POTENTIALLY UNSAFE: Monkeypatch new functions to "core objects".
 
 Monkeypatching new methods to "core objects" (e.g. `HTMLElement` and `Object`) is a fairly common way to quickly insert functionality into a large part of your JavaScript environment, but you also run the risk of having your method names clash with other libraries and third-party code. Since these "core objects" are fundamental to your runtime environment, you can't use techniques like [IIFEs](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) and [ES2015 modules](https://babeljs.io/docs/learn-es2015/#modules) to avoid namespace collisions.
 
@@ -100,7 +100,7 @@ HTMLElement.prototype.on = function(color) {
 }
 ```
 
-One will overwrite the other, so you'll see strange behavior like exceptions being thrown, a glaringly-bright UI, no handlers being registered, etc. Blindly using the `override` function in this scenario will cause even more havoc, since the two functions have different interfaces and "meaning".
+One will overwrite the other, depending on load order, so you'll see strange behavior like exceptions being thrown, a glaringly-bright UI, no handlers being registered, etc. Blindly using the `override` function in this scenario will cause even more havoc, since the two functions have different interfaces and "meaning".
 
 Worse, if the library focuses on buttons, perhaps the developer monkeypatched `HTMLButtonElement` instead, which is a child of `HTMLElement`. Now, all your super-bright buttons don't respond to clicks, but everything else works perfectly.
 
